@@ -1,0 +1,18 @@
+class Solution:
+    def plusOne(self, digits):
+        """
+        :type digits: List[int]
+        :rtype: List[int]
+        """
+        tmp = 1
+        for i in range(len(digits)-1, -1, -1):
+            if digits[i] == 9 and tmp == 1:
+                tmp = 1 
+                digits[i] = 0
+            elif tmp == 1:
+                digits[i] += 1
+                tmp = 0
+        if tmp == 1:
+            print(2)
+            digits.insert(0, 1)
+        return digits

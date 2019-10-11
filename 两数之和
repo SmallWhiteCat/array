@@ -1,0 +1,21 @@
+class Solution:
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        nums_sort = sorted(nums)
+        for i in range(len(nums)):
+            rem = target - nums_sort[i]
+            for j in range(i+1, len(nums)):
+                if rem == nums_sort[j]:
+                    m = nums.index(nums_sort[i])
+                    nums[m] = -1
+                    n = nums.index(nums_sort[j])
+                    if m>n: 
+                        return n,m 
+                    else: 
+                        return m,n
+                elif rem < nums_sort[j]:
+                    continue

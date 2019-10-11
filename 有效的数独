@@ -1,0 +1,42 @@
+class Solution:
+    def isValidSudoku(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: bool
+        """
+        l = len(board)
+        line_board = board
+        for i in range(l):    
+            l_board = line_board[i]
+            p_n = l_board.count('.')
+            if p_n:
+                set1, set2 = len(l_board) - p_n, len(set(l_board)) - 1
+            else:
+                set1, set2 = len(l_board), set(l_board) 
+            if set1 != set2:
+                return False
+        col_board = list(zip(*board))
+        for i in range(l):
+            c_board = col_board[i]
+            col_board[i] = list(c_board)
+            p_n = c_board.count('.')
+            if p_n:
+                set1, set2 = len(c_board) - p_n, len(set(c_board)) - 1
+            else:
+                set1, set2 = len(c_board), set(c_board) 
+            if set1 != set2:
+                return False
+        for i in range(l//3): #
+            for j in range(l//3): #
+                sudo = []
+                for k in range(l//3):
+                    sudo.extend(board[3*j+k][3*i: 3*i+3])
+                s_len = sudo.count('.')
+                if s_len:
+                    set1, set2 = len(sudo) - s_len, len(set(sudo)) - 1
+                else:
+                    set1, set2 = len(sudo), set(sudo) 
+                if set1 != set2:
+                    return False
+        return True
+            
